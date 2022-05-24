@@ -2,16 +2,18 @@
 <AppHeader />
 
   <div class="w-full">
-    <DcHeros />
+    <!-- <DcHeros /> -->
+    <AppCalendar />
   </div>
 </template>
 
 
 <script>
 import AppHeader from "./components/AppHeader";
-import DcHeros from "./components/DcHeros";
+import AppCalendar from "./components/AppCalendar";
+// import DcHeros from "./components/DcHeros";
 
 export default{
-  components: {AppHeader,DcHeros}
+  components: {AppHeader,AppCalendar,/*DcHeros*/}
 }
 </script>
