@@ -12,17 +12,32 @@
         <p 
           class="text-center my-2" 
           style="width:14.28%" 
-          v-for="day in startDay()" 
+          v-for="day in days" 
           :key="day"
         >
-
-          
-
+          {{ day }}
         </p>
       </section>
-
       <section class="flex flex-wrap">
-        <p class="text-center" style="width:14.28%" v-for="num in daysInMonth(currentYear, currentMonth)" :key="num">{{ num }}</p>
+        <p 
+          class="text-center my-2" 
+          style="width:14.28%" 
+          v-for="startDay in startDay()" 
+          :key="startDay"
+        > </p>
+        <p 
+          class="text-center" 
+          style="width:14.28%" 
+          v-for="num in daysInMonth()" 
+          :key="num"
+          :class="currentDayClass(num)"
+        >
+            {{ num }}
+        </p>
+      </section>
+      <section class="flex justify-between my-4">
+        <button class="px-2 borer rounded" @click="prev">Prev</button>
+        <button class="px-2 borer rounded" @click="next">Next</button>
       </section>
     </div>
   </div>
@@ -32,22 +47,55 @@
 export default {
   data(){
     return{
-      currentMonthName: new Date().toLocaleString('default',{month: "long"}),  // may or june or ...
-      currentMonth: new Date().getMonth() + 1,// month + 1 since it gives the index number if the number so to get the actual month number add 1
+      currentDay: new Date().getDate(),
+      currentMonth: new Date().getMonth(),// month + 1 since it gives the index number if the number so to get the actual month number add 1
       currentYear: new Date().getFullYear(), //2022
       days: ['Sun', 'Mon', "Tue", "Wed", "Thu", "Fri", "Sat"]
     }
   },
 
   methods:{
-    daysInMonth(year, month){
-      return new Date(year, month, 0).getDate();
+    daysInMonth(){
+      return new Date(this.currentYear, this.currentMonth+1, 0).getDate();
     },
 
-    startDay(){
-    return new Date(this.currentYear, this.currentMonth - 1, 1).getDay();
-  }
+    startDay(){  
+      return new Date(this.currentYear, this.currentMonth, 1).getDay(); //first day of the month
+    },
+
+    next(){
+      if(this.currentMonth === 11){
+        this.currentMonth = 0;
+        this.currentYear++;
+      }else{
+        this.currentMonth++;
+      }
+
+    },
+    prev(){
+      if(this.currentMonth === 0)
+      {
+        this.currentMonth =11;
+        this.currentYear--;
+      }else{
+        this.currentMonth--;
+      }
+      
+    },
+
+    currentDayClass(num){
+      const calendarFullDate = new Date(this.currentYear, this.currentMonth, num).toDateString();
+
+      const currentFullDate = new Date().toDateString();
+      return calendarFullDate === currentFullDate ? 'text-yellow-600' : '';
+    }
   },
+
+  computed:{
+    currentMonthName(){
+      return new Date(this.currentYear, this.currentMonth).toLocaleString('default',{month: "long"});  // may or june or ...
+    },
+  }
 }
 </script>
 <style>
