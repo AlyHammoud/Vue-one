@@ -8,3 +8,25 @@ vue create <file name>
     then only can be used in the model name used with as    
     @change-login-status="login = false"
 
+//firebase:
+getstarted
+add project
+(disable analytics if i dont want to )
+then create
+continue
+
+1. authentication
+    getstarted:
+        sign-in method
+            choose: email/password
+2. go to home or the console
+    enter to the project we recently created
+    click on the icon(</>) which means for web
+    then add a register name without the hosting name if i want
+    then it will generate the sdk
+
+3. then create inside your project a file firebase.js (in this project it is put in utilities folder)
+    then paste the sdk copied from firebase
+
+4. npm install firebase
+        to install module

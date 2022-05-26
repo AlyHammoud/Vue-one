@@ -15,7 +15,7 @@
                 type="text"
                 class="rounded shadow p-2 w-full"
                 placeholder="Email or user"
-                v-model="form.email"
+                v-model="email"
               />
             </div>
             <div class="my-4">
@@ -24,7 +24,7 @@
                 type="password"
                 class="rounded shadow p-2 w-full"
                 placeholder="password"
-                v-model="form.password"
+                v-model="password"
               />
             </div>
             <div class="my-4">
@@ -43,20 +43,26 @@
 </template>
 
 <script>
+import { firebase } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
+
 export default {
-    data(){
-        return{
-            form:{
-                email : '',
-                password: '',
-            }
-        }
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    submit() {
+        const auth = getAuth(firebase);
+        signInWithEmailAndPassword(auth, this.email, this.password)
+        .then((res) => {console.log(res)})
+        .catch((e) => {
+            console.log(e)
+        });
     },
-    methods:{
-        submit(){
-            this.form
-        }
-    }
+  },
 };
 </script>
 
