@@ -32,7 +32,9 @@
                 type="submit"
                 class="w-full rounded shadow bg-gradient-to-r from-red-800 to-pink-500 p-2 text-white"
               >
-                Login
+                <span v-if="!isLoading">Login</span>
+                <span v-else>⏳</span>
+                
               </button>
             </div>
           </form>
@@ -49,15 +51,22 @@ import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: "ali@ali.ali",
+      password: "123456",
+      isLoading: false
     };
   },
   methods: {
     submit() {
+
+        this.isLoading = true;
+
         const auth = getAuth(firebase);
         signInWithEmailAndPassword(auth, this.email, this.password)
-        .then((res) => {console.log(res)})
+        .then((res) => {
+            console.log(res)
+            this.isLoading = false;
+            })
         .catch((e) => {
             console.log(e)
         });

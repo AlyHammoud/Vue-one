@@ -10,10 +10,14 @@
       >{{ item.title }}</router-link
     >
     <button class="mx-2" @click="$emit('open-login-modal')">Login</button>
+    <button class="mx-2" @click="logout">Log out</button>
   </nav>
 </template>
 
 <script>
+import {firebase} from "../utilities/firebase"
+import { getAuth, signOut } from "firebase/auth";
+
 export default {
   data() {
     return {
@@ -25,6 +29,21 @@ export default {
         { title: "Slider Carousel", to: "/slider" },
       ],
     };
+  },
+
+  methods: {
+    logout() {
+      const auth = getAuth(firebase);
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          console.log('logged out');
+        })
+        .catch((error) => {
+          console.log(error)
+          // An error happened.
+        });
+    },
   },
 };
 </script>

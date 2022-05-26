@@ -9,6 +9,8 @@
 <script>
 import AppHeader from "./components/AppHeader";
 import LoginModal from "./components/LoginModal";
+import { firebase } from "./utilities/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
   components: { AppHeader, LoginModal },
@@ -16,7 +18,22 @@ export default {
   data() {
     return {
       isLoginOpen: false,
+      isLoggedIn: false
     };
+  },
+
+  mounted() {
+    const auth = getAuth(firebase);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.isLoggedIn = true
+        const authUser = user;
+        console.log(authUser);
+      } else {
+        this.isLoggedIn = false
+        this.authUser = {};
+      }
+    });
   },
 };
 </script>

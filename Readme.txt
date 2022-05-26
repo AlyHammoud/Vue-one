@@ -30,3 +30,13 @@ continue
 
 4. npm install firebase
         to install module
+
+5. follow the documnetion:
+    https://firebase.google.com/docs/auth/web/password-auth
+
+
+// install Emoji extension
+    ctl + shift + p
+    Emoji:insert emoji
+    then select which Emoji
+    
