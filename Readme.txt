@@ -54,3 +54,6 @@ continue
         this.$refs.paragraph.focus();
       }
     }
+
+
+    newBranch
