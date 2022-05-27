@@ -40,3 +40,17 @@ continue
     Emoji:insert emoji
     then select which Emoji
     
+
+//teleport: to put the content inside in the index.html outside the div
+  <teleport to="#app2">
+    div or component
+  </teleport>
+
+  //$refs: can be used in the html tag as refrence: like getElementById
+    <input type="text" ref="paragraph" />
+
+    in methods:{
+      changeParagraphtoRed(){
+        this.$refs.paragraph.focus();
+      }
+    }

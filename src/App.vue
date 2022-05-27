@@ -1,9 +1,11 @@
 <template>
-  <AppHeader @open-login-modal="isLoginOpen = true" />
+  <AppHeader :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true" />
   <div class="w-full">
     <router-view></router-view>
   </div>
-  <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen = false" />
+  <teleport to="body">
+    <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen = false" />
+  </teleport>
 </template>
 
 <script>
@@ -18,7 +20,7 @@ export default {
   data() {
     return {
       isLoginOpen: false,
-      isLoggedIn: false
+      isLoggedIn: false,
     };
   },
 
@@ -26,11 +28,11 @@ export default {
     const auth = getAuth(firebase);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        this.isLoggedIn = true
+        this.isLoggedIn = true;
         const authUser = user;
         console.log(authUser);
       } else {
-        this.isLoggedIn = false
+        this.isLoggedIn = false;
         this.authUser = {};
       }
     });
