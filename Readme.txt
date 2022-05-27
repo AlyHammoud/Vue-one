@@ -57,3 +57,31 @@ continue
 
 
     newBranch
+    //in composition API ref is different from the normal $ref
+    
+
+    //in setup(){
+
+    }
+
+    // we can use functions and constants without defining 
+      methods:
+      computed:
+      ...
+
+    //but we should import {refs} from "vue"
+
+    //every const its value migth change we must use ref("")
+                                                      ref({a:a})
+
+    //to refrence to a const in setup() we dont use this anymore
+      we use the const directly, and to access it value we use .value
+
+    // if a html tag has ref : <input ref="name123">
+      cant use like in data(){
+        this.$ref.name123.focus
+      }
+
+    but instead: we define it as ref:
+      const name123 = ref("");
+      name123.value.focus();

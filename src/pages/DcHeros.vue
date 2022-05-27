@@ -30,38 +30,38 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
-  data() {
-    return {
-      dcHero: "",
-      fname: "My",
-      lname: "Nameu",
-      dcHeros: [
-        { name: "one" },
-        { name: "Two" },
-        { name: "Thre" },
-        { name: "Four" },
-      ],
-    };
-  },
+  setup() {
+    const dcHero = ref("");
+    const fname = "My";
+    const lname = "Nameu";
+    const newHeroRef = ref("");
 
-  mounted(){
-    this.$refs.newHeroRef.focus();
-  },
+    const dcHeros = ref([
+      { name: "one" },
+      { name: "Two" },
+      { name: "Thre" },
+      { name: "Four" },
+    ]);
 
-  methods: {
-    addHero: function () {
-      if (this.dcHero != "") {
-        this.dcHeros.unshift({ name: this.dcHero });
-        this.dcHero = "";
-      }
-    },
-
-    removeHero: function (heroName) {
-      this.dcHeros = this.dcHeros.filter(function (hero) {
+    function removeHero(heroName) {
+      dcHeros.value = dcHeros.value.filter(function (hero) {
         return heroName != hero.name;
       });
-    },
+    }
+
+    function addHero() {
+      if (dcHero.value != "") {
+        dcHeros.value.unshift({ name: dcHero.value });
+        dcHero.value = "";
+      }
+    }
+
+    onMounted(() => newHeroRef.value.focus());
+
+    return { dcHeros, dcHero, lname, fname, removeHero, addHero, newHeroRef };
   },
 };
 </script>
