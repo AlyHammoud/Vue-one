@@ -85,3 +85,29 @@ continue
     but instead: we define it as ref:
       const name123 = ref("");
       name123.value.focus();
+
+
+
+      //////////////////////////////////////
+
+      Slots:
+      to use slot in child component
+      type slot with name 
+      <slot name="title"></slot>
+      <slot name="body1">
+        <main></main>
+      </slot>
+
+
+      then::: in parent component:
+      <template>
+        <div>
+          <template #title>   //or v-slot:title
+              make the design here
+          </template>
+
+          <template #body1>  ///or v-slot:body1
+              make the design here
+          </template>
+        </div>
+      </template>

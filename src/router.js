@@ -5,6 +5,7 @@ import AppHome from "./pages/AppHome";
 import MarkDown from "./pages/MarkDown";
 import AppSlider from "./pages/AppSlider";
 import AppCalculator from "./pages/AppCalculator";
+import ReuseableModal from "./pages/ReuseableModal";
 
 const routes = [
   { path: "/", component: AppHome },
@@ -13,6 +14,7 @@ const routes = [
   { path: "/markdown", component: MarkDown },
   { path: "/slider", component: AppSlider },
   { path: "/calculator", component: AppCalculator },
+  { path: "/reuseable", component: ReuseableModal },
 ];
 
 const router = createRouter({
