@@ -4,7 +4,12 @@
   <section class="flex m-auto w-10/12 h-screen">
     <article class="w-1/2 border">
       <!-- <textarea class="w-full h-full" v-model.lazy="text"></textarea>  when loose focus apply the changes (blur)-->
-      <textarea ref="markDownTextArea" class="w-full h-full" :value="text" @input="update"></textarea>
+      <textarea
+        ref="markDownTextArea"
+        class="w-full h-full"
+        :value="text"
+        @input="update"
+      ></textarea>
     </article>
     <article class="w-1/2 border bg-gray-100" v-html="markedText1"></article>
   </section>
@@ -12,14 +17,14 @@
 
 <script>
 import { marked } from "marked";
-import debounce from "../utilities/mixins/debounce";
+import useDebounce from "../utilities/composition/useDebounce";
 
 export default {
-  mixins: [debounce],
-
+  
   data() {
     return {
       text: "",
+      debounce: ""
     };
   },
 
@@ -36,9 +41,11 @@ export default {
     },
   },
 
-  mounted(){
-      this.$refs.markDownTextArea.focus();
-  }
+  mounted() {
+    const { debounce } = useDebounce();
+    this.debounce = debounce;
+    this.$refs.markDownTextArea.focus();
+  },
 };
 </script>
 

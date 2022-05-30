@@ -1,10 +1,10 @@
 <template>
-  <AppHeader :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true" />
+  <AppHeader />
   <div class="w-full">
     <router-view></router-view>
   </div>
   <teleport to="body">
-    <LoginModal v-if="isLoginOpen" @close-login="isLoginOpen = false" />
+    <LoginModal />
   </teleport>
 </template>
 
@@ -17,23 +17,15 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export default {
   components: { AppHeader, LoginModal },
 
-  data() {
-    return {
-      isLoginOpen: false,
-      isLoggedIn: false,
-    };
-  },
-
   mounted() {
     const auth = getAuth(firebase);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        this.isLoggedIn = true;
-        const authUser = user;
-        console.log(authUser);
+        this.$store.commit('setIsLoggedIn');
+        this.$store.commit('setAuthUser', user);
       } else {
-        this.isLoggedIn = false;
-        this.authUser = {};
+        this.$store.commit('setIsLoggedIn', false);
+        this.$store.commit('setAuthUser', {});
       }
     });
   },

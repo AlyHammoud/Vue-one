@@ -112,7 +112,8 @@
 </template>
 
 <script>
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref } from "vue";
+import useWindowEvent from "../utilities/composition/useWindowEvent";
 
 export default {
   setup() {
@@ -175,9 +176,11 @@ export default {
       if (e.key === "Enter") calculate();
     }
 
-    onMounted(() => window.addEventListener("keydown", handleKeyDown));
+    useWindowEvent(handleKeyDown)
 
-    onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
+    // onMounted(() => window.addEventListener("keydown", handleKeyDown));
+
+    // onUnmounted(() => window.removeEventListener("keydown", handleKeyDown));
 
     return {
       currentNumber,

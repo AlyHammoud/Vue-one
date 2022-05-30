@@ -111,3 +111,41 @@ continue
           </template>
         </div>
       </template>
+
+
+
+      // ref vs reative
+      ref is good for single value
+      reactive for multiple values:
+       const state = reactive({
+      chats: {},
+      message: "",
+    });
+
+    then only return reatacive
+
+    //////////////////////////////////////
+
+    vuex:
+      src/store/index.js  
+        go to vuex how to install and copy: or:
+              import { createStore } from "vuex";
+
+              // Create a new store instance.
+              const store = createStore({
+                state() {
+                  
+                },
+                mutations: {
+                  
+                },
+              });
+
+              // Install the store instance as a plugin
+              export default store;
+              ////then need to import it in main.js: import store from "store/index"
+
+              it can be used as this.$store.state
+
+
+/////////////
